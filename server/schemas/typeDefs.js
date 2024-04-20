@@ -31,7 +31,7 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
         createUser(username: String!, email: String!, password: String!): Auth
         saveBook(userId: ID!, book: String): User
-        deleteBook(bookId: String!): User
+        deleteBook(theBookId: String!): User
     }
 `;
 module.exports = typeDefs;
