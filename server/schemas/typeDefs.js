@@ -15,6 +15,15 @@ const typeDefs = `
         link: String
         title: String!
     }
+        
+    input BookInput {
+        authors: [String]
+        description: String!
+        bookId: String!
+        image: String
+        link: String
+        title: String!
+    }
 
     # Set up an Auth type to handle returning data from a user creating or user login
     type Auth {
@@ -30,8 +39,10 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         createUser(username: String!, email: String!, password: String!): Auth
-        saveBook(userId: ID!, book: String): User
-        deleteBook(theBookId: String!): User
+        saveBook(book: BookInput!): User
+        deleteBook(bookId: ID!): User
     }
+
+
 `;
 module.exports = typeDefs;
