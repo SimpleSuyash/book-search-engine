@@ -1,4 +1,4 @@
-const typeDefs = `
+const typeDefs = `#graphql
     type User {
         _id: ID!
         username: String!
@@ -42,7 +42,5 @@ const typeDefs = `
         saveBook(book: BookInput!): User
         deleteBook(bookId: ID!): User
     }
-
-
 `;
 module.exports = typeDefs;

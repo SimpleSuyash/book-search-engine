@@ -1,4 +1,4 @@
-const {User, Book} = require('../models');
+const {User} = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -7,16 +7,11 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    .populate('savedBooks');
+                    // .populate('savedBooks')
+                    ;
                 return userData;
             }
             throw AuthenticationError;
-        },
-
-        // get single user by either their id or their username
-        user: async (parent, { userId }) => {
-            const params = userId ? { _id: userId } : {};
-            return User.findOne(params);
         },
     },
     Mutation:{
@@ -44,14 +39,16 @@ const resolvers = {
         // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
         saveBook: async (parent, { book }, context) => {
             if (context.user) {
-                const updatedUser = await User.findOneAndUpdate(
+                const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { savedBooks: book } },
                     { 
                         new: true,
                         runValidators: true
                      }
-                ).populate('savedBooks');
+                )
+                // .populate('savedBooks')
+                ;
                 return updatedUser;
             }
             throw AuthenticationError;
@@ -64,7 +61,9 @@ const resolvers = {
                     { _id: context.user._id },
                     { $pull: { savedBooks: { bookId } } },
                     { new: true }
-                ).populate('savedBooks');
+                )
+                // .populate('savedBooks')
+                ;
                 return updatedUser;
             }
             throw AuthenticationError;
