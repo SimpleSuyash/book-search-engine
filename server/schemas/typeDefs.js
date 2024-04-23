@@ -24,15 +24,13 @@ const typeDefs = `#graphql
         link: String
         title: String!
     }
-
-    # Set up an Auth type to handle returning data from a user creating or user login
+    
     type Auth {
       token: ID!
       user: User
     }
 
     type Query {
-        user(userId: ID!): User
         me: User
     }
 
