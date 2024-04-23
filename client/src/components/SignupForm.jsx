@@ -52,7 +52,7 @@ const SignupForm = () => {
       */
      
       // /*
-     console.log("1")
+     console.log({ ...userFormData })
       const { data } = await createUser({
         variables: { ...userFormData },
       });
