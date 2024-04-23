@@ -34,35 +34,15 @@ const SignupForm = () => {
     }
 
     try {
-      /*
-      console.log("1")
-      const response = await createUser({
-        variables: {...userFormData},
-      });
-      console.log("2")
-      if (!response.ok) {
-        console.log("3")
-        throw new Error('something went wrong!');
-      }
-      console.log("4")
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-      */
      
-      // /*
-     console.log({ ...userFormData })
       const { data } = await createUser({
         variables: { ...userFormData },
       });
-      console.log("2")
       Auth.login(data.createUser.token);
-      // */
+  
     } catch (err) {
       console.error(err);
       setShowAlert(true);
-      console.log("3")
     }
 
     setUserFormData({
