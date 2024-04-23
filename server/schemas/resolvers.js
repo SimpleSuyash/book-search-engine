@@ -30,7 +30,7 @@ const resolvers = {
     },
 
     // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
-    createUser: async (parent, { username, email, password }) => {
+    addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
@@ -44,24 +44,21 @@ const resolvers = {
           { $addToSet: { savedBooks: book } },
           {
             new: true,
-            runValidators: true,
           }
         );
-        // .populate('savedBooks')
         return updatedUser;
       }
       throw AuthenticationError;
     },
 
     // remove a book from `savedBooks`
-    deleteBook: async (parent, { bookId }, context) => {
+    removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { savedBooks: { bookId } } },
           { new: true }
         );
-        // .populate('savedBooks')
         return updatedUser;
       }
       throw AuthenticationError;

@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 // Important for useMutation: We import the useMutation hook from @apollo/client
 import { useMutation } from '@apollo/client';
 // We import the ADD_USER mutation from the mutations file
-import { CREATE_USER } from '../utils/mutations';
+import { ADD_USER } from '../utils/mutations';
 // import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 
@@ -14,7 +14,7 @@ const SignupForm = () => {
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-  const [createUser, {error, data}] = useMutation(CREATE_USER);
+  const [createUser, {error, data}] = useMutation(ADD_USER);
 
   //handle input change
   const handleInputChange = (event) => {
