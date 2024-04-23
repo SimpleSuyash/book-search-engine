@@ -41,4 +41,5 @@ const typeDefs = `#graphql
         removeBook(bookId: String!): User
     }
 `;
+
 module.exports = typeDefs;
