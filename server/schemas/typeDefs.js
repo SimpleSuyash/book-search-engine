@@ -3,8 +3,8 @@ const typeDefs = `#graphql
         _id: ID!
         username: String!
         email: String!
-        password: String!
         savedBooks: [Book]
+        bookCount: Int!
     }
     type Book {
         _id: ID!
